@@ -1,20 +1,36 @@
+# config.py – Number Info Bot (Complete & Ready to Deploy)
+
 import os
-from dotenv import load_dotenv
 
-load_dotenv()  # for local testing; on Render use env vars directly
+# ---------- Owner & Admins ----------
+OWNER_ID = 8104850843
+ADMIN_IDS = [5987905091]
 
-TOKEN = os.getenv("BOT_TOKEN")
-API_URL = os.getenv("API_URL")
-API_KEY = os.getenv("API_KEY", "")
-API_PARAM_NAME = os.getenv("API_PARAM_NAME", "number")
+# ---------- Force Join Channels (Name, Link, ID) ----------
+FORCE_JOIN_CHANNELS = [
+    {"name": "All Data Here", "link": "https://t.me/all_data_here", "id": -1003090922367},
+    {"name": "OSINT Lookup", "link": "https://t.me/osint_lookup", "id": -1003698567122},
+    {"name": "LEGEND CHATS", "link": "https://t.me/legend_chats_osint", "id": -1003672015073}
+]
 
-# Force channels: list of channel IDs (integers) and their usernames (for invite links)
-FORCE_CHANNEL_IDS = [int(x.strip()) for x in os.getenv("FORCE_CHANNEL_IDS", "-1003090922367").split(",")]
-FORCE_CHANNEL_USERNAMES = [x.strip() for x in os.getenv("FORCE_CHANNEL_USERNAMES", "all_data_here").split(",")]
+# ---------- Log Channel for Number Lookups ----------
+LOG_CHANNEL_NUM = -1003482423742
 
-LOG_CHANNEL_ID = int(os.getenv("LOG_CHANNEL_ID", "-1003482423742"))
+# ---------- Number Info API ----------
+NUM_API = {
+    'url': 'https://ayaanmods.site/number.php?key=annonymous&number={}',
+    'param': 'number',
+    'desc': 'Mobile number lookup',
+    'extra_blacklist': ['API_Developer', 'channel_name', 'channel_link']
+}
 
-# Webhook settings
-PORT = int(os.getenv("PORT", 8443))
-WEBHOOK_URL = os.getenv("WEBHOOK_URL")  # e.g. https://your-app.onrender.com
-WEBHOOK_PATH = f"/{TOKEN}" if TOKEN else "/webhook"
+# ---------- Branding ----------
+DEV_USERNAME = "@Nullprotocol_X"
+POWERED_BY = "NULL PROTOCOL"
+
+# ---------- Backup Channel ----------
+BACKUP_CHANNEL = -1003740236326
+
+# ---------- Webhook Settings (for Render deployment) ----------
+WEBHOOK_URL = "https://testjson-dkk2.onrender.com"
+PORT = int(os.environ.get("PORT", 8000))
